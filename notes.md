@@ -83,3 +83,10 @@ We are calling printf like this :
 ```c
 printf( "%x %x %x %x" );
 ```
+
+The important thing here is that we haven’t supplied the four numeric variables into the string, printf doesn’t fail instead  producing output that looks like this :
+
+```
+# ./exp "%x %x %x %x"
+b7ff1040 804849b b7fd7ff4 8048490
+```
