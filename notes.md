@@ -73,3 +73,13 @@ int main( int argc, char *argv[] )
 # file exp
 exp: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.18, not stripped
 ```
+
+If we run the binary now like this : 
+
+`# ./exp "%x %x %x %x"`
+
+We are calling printf like this : 
+
+```c
+printf( "%x %x %x %x" );
+```
