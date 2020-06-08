@@ -93,7 +93,7 @@ b7ff1040 804849b b7fd7ff4 8048490
 
 So printf() takes four arguments from somewhere. These arguments are coming from the stack.
 
-This may appear not to be a problem, however an attacker might be able to see the contents of the stack. What does that mean? It might reveal sensitive information such as usernames & passwords.
+This may appear not to be a problem, however an attacker might be able to see the contents of the stack. It might reveal sensitive information such as usernames & passwords.
 
 Now if we try to input a large number of `%x` format specifiers & "A" we will get this :
 
