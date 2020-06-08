@@ -46,7 +46,7 @@ vsnprintf
 wprintf
 ```
 
-& any similar functions that accept a string that can contain C-style format specifiers.
+& any similar functions that can contain C-style format specifiers.
 
 I found a really good example in shellcoders handbook, a program that calls `printf` with an argument :
 
@@ -84,9 +84,21 @@ We are calling printf like this :
 printf( "%x %x %x %x" );
 ```
 
-The important thing here is that we haven’t supplied the four numeric variables into the string, printf doesn’t fail instead  producing output that looks like this :
+The important thing here is that we haven’t specify the four numeric variables into the string, printf() doesn’t fail instead  producing output that looks like this :
 
 ```
 # ./exp "%x %x %x %x"
 b7ff1040 804849b b7fd7ff4 8048490
+```
+
+So printf() takes four arguments from somewhere. These arguments are coming from the stack.
+
+This may appear not to be a problem, however an attacker might be able to see the contents of the stack. What does that mean? It might reveal sensitive information such as usernames & passwords.
+
+Now if we try to input a large number of `%x` format specifiers & "A" we will get this :
+
+```
+# ./exp "AAAAAAAAAAAAAAAAAAA%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x"
+
+AAAAAAAAAAAAAAAAAAAb7ff1040804849bb7fd7ff480484900bffffc68b7eadc762bffffc94bffffca0b7fe1848bffffc50ffffffffb7ffeff480482691bffffc50b7ff0626b7fffab0b7fe1b28b7fd7ff400bffffc68fc1008a4d65f9eb4000280483800b7ff6210b7eadb9bb7ffeff428048380080483a180484342bffffc9480484908048480b7ff1040bffffc8cb7fff8f82bffffdadbffffdb30bffffec9bffffed3bffffef3bfffff07bfffff0fbfffff1bbfffff26bfffff39bfffff46bfffff4ebfffff59bfffff9bbfffffacbfffffbcbfffffc5020b7fe241421b7fe200010f8bfbff61000116438048034420577b7fe30008098048380b0c0d0e017019bffffd8b1fbffffff6fbffffd9b000073000000f44ba45051ed81f361b5575769b78269363836000652f2e0041007078414141414141414141414141414141417825414178257825782578257825782578257825
 ```
