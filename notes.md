@@ -48,4 +48,28 @@ wprintf
 
 & any similar functions that accept a string that can contain C-style format specifiers.
 
+I found a really good example in shellcoders handbook, a program that calls `printf` with an argument :
 
+```c
+# touch exp.c
+# nano exp.c
+# cat exp.c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main( int argc, char *argv[] )
+{
+        if( argc != 2 )
+        {
+                printf("Error - supply a format string please\n");
+                return 1;
+        }
+        printf( argv[1] );
+        printf( "\n" );
+
+        return 0;
+}
+# gcc exp.c -o exp
+# file exp
+exp: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.18, not stripped
+```
